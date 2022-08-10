@@ -33,7 +33,7 @@ fn main() -> Res<()> {
     let client = get_client();
     client.start(tx_capt);
 
-    let mut outfile = File::create("recorded.raw")?;
+    let mut outfile = File::create("../../recorded.raw")?;
     info!("Saving captured raw data to 'recorded.raw'");
 
     loop {

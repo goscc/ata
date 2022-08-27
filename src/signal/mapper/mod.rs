@@ -1,30 +1,26 @@
 pub mod mapper;
 
 
-use std::collections::HashMap;
-use std::future::Future;
 use hyper::{Body, Request, Response};
 use crate::Method;
 
 
-type F = dyn FnMut(Request<Body>) -> dyn Future;
 
 pub struct Mapper {
-    get : HashMap<str, F>,
-    post: HashMap<str, F>,
+    // get : Mutex<HashMap<str, F>>,
+    // post: Mutex<HashMap<str, F>>,
 }
 
 impl Mapper{
-    pub fn handler(req: Request<Body>) -> Result<Response<Body>, hyper::Error>{
-        match req.method() {
-            // &Method::GET => ,
-            // &Method::POST => ,
-            _ => Ok(Response::new(Body::from("lqq")))
-        }
+    pub fn new() -> Mapper {
+        Mapper{}
     }
 
-    // fn register(m: Method, f : F) {
-    //
-    //
-    // }
+    pub async fn handler(self, req :Request<Body>) -> Result<Response<Body>, hyper::Error>  {
+        match req.method() {
+            &Method::GET => Ok(Response::new(Body::from("GET"))),
+            &Method::POST => Ok(Response::new(Body::from("POST"))),
+            _=>Ok(Response::new(Body::from("not found"))),
+        }
+    }
 }

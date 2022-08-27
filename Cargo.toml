@@ -15,9 +15,9 @@ path = "src/signal/main.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-wasapi = "0.12.0"
-log = "0.4.14"
-simplelog = "0.11.2"
+#wasapi = "0.12.0"
+#log = "0.4.14"
+#simplelog = "0.11.2"
 
 hyper = { version = "0.14", features = ["full"] }
 tokio = { version = "1", features = ["full"] }

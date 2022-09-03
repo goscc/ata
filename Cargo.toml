@@ -3,6 +3,15 @@ name = "a2a"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "pub"
+path = "src/pub/main.rs"
+
+[[bin]]
+name = "signal"
+path = "src/signal/main.rs"
+
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
@@ -15,3 +24,6 @@ futures = "0.3"
 actix-web = "4"
 actix-files = "0.6.2"
 opus = "0.3.0"
+#simplelog = "0.11.2"
+serde_json = { version = "1.0", features = ["alloc"] }
+serde = {version = "1.0", features = ["derive"]}

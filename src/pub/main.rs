@@ -36,8 +36,8 @@ fn main() -> Res<()> {
     let client = get_client();
     client.start(tx_capt);
 
-    let mut outfile = File::create("recorded.opus")?;
-    info!("Saving captured raw data to 'recorded.opus'");
+    let mut outfile = File::create("../../recorded.raw")?;
+    info!("Saving captured raw data to 'recorded.raw'");
 
     let mut encoder = Encoder::new(48000, opus::Channels::Stereo, opus::Application::LowDelay).unwrap();
 	// let mut encoder = opus::Encoder::new(48000, opus::Channels::Stereo, opus::Application::Audio).unwrap();

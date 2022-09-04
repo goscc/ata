@@ -30,7 +30,7 @@ fn capture_loop(tx_capt: std::sync::mpsc::SyncSender<Vec<u8>>, chunksize: usize)
 
     let mut audio_client = device.get_iaudioclient()?;
 
-    let desired_format = WaveFormat::new(16, 16, &SampleType::Int, 48000, 1);
+    let desired_format = WaveFormat::new(32, 32, &SampleType::Float, 44100, 2);
 
     let blockalign = desired_format.get_blockalign();
     debug!("Desired capture format: {:?}", desired_format);
@@ -72,7 +72,7 @@ fn capture_loop(tx_capt: std::sync::mpsc::SyncSender<Vec<u8>>, chunksize: usize)
         }
         trace!("capturing");
         render_client.read_from_device_to_deque(blockalign as usize, &mut sample_queue)?;
-        if h_event.wait_for_event(3000).is_err() {
+        if h_event.wait_for_event(300000).is_err() {
             error!("timeout error, stopping capture");
             audio_client.stop_stream()?;
             break;

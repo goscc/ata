@@ -36,34 +36,15 @@ fn main() -> Res<()> {
     let client = get_client();
     client.start(tx_capt);
 
-    let mut outfile = File::create("../../recorded.raw")?;
+    let mut outfile = File::create("../recorded.raw")?;
     info!("Saving captured raw data to 'recorded.raw'");
 
-    let mut encoder = Encoder::new(48000, opus::Channels::Stereo, opus::Application::LowDelay).unwrap();
 	// let mut encoder = opus::Encoder::new(48000, opus::Channels::Stereo, opus::Application::Audio).unwrap();
     loop {
         match rx_capt.recv() {
             Ok(chunk) => {
                 debug!("writing to file");
-                let mut index = 0;
-                let mut buffer = [0u8; 2];
-                let mut frames: Vec<i16> = Vec::with_capacity(chunk.len()/2);
-                for i in 0..chunk.len() {
-                    buffer[index] = chunk[i];
-                    if index == 1 {
-                        index = 0;
-                        frames.push(i16::from_le_bytes(buffer));
-                        if frames.len() == 480 {
-                            info!("reciving input {} size.", frames.len());
-                            let output = encoder.encode_vec(&frames[..], frames.len())?;
-                            info!("reciving {} size.", output.len());
-                            outfile.write_all(&output)?;
-                            frames.clear();
-                        }
-                    } else {
-                        index += 1;
-                    }
-                }
+                outfile.write_all(&chunk)?;
             }
             Err(err) => {
                 error!("Some error {}", err);

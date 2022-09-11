@@ -10,6 +10,7 @@ use crate::Method;
 type R = Result<Response<Body>, hyper::Error>;
 
 pub struct Mapper {
+    //fixme: add api feature, judge is the id is timeout
     pub id_to_offer: Mutex<HashMap<u32, Offer>>,
     pub id_to_answer: Mutex<HashMap<u32, Answer>>,
     pub counter: Mutex<u32>

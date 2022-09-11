@@ -1,5 +1,6 @@
 mod platform;
 mod backend;
+mod audio_sender;
 
 use actix_web::body::MessageBody;
 use platform::audio_capture_client::AudioCaptureClient;
